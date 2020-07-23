@@ -1,0 +1,68 @@
+*
+{
+    margin: 0;
+    padding:0;
+}
+body{
+    font-family: sans-serif;
+}
+#nav-bar{
+    position: sticky;
+    top:0;
+    z-index: 10;
+}
+.navbar{
+    background: linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%);
+    padding:0 !important;
+}
+.navbar-brand img{
+    height: 40px;
+    padding-left: 20px;
+}
+.navbar-nav li{
+    padding:0 10px;
+}
+.navbar-nav li a{
+    color: white !important;
+    font-weight: 600;
+    float: right;
+    text-align: left;
+}
+.fa-bars{
+/* the color of the three lines */
+color:#333;
+font-size: 30px !important;
+}
+.navbar-toggler{
+    outline: none !important;
+}
+
+/*************header section *****************/
+
+/* #banner{
+    background-image: linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%);
+    color: blue;
+    padding-top: 5%;
+}
+.promo{
+    font-size: 40px;
+    font-weight: 600;
+    margin-top: 100px; 
+} */
+header{
+   /*Sizing of the element*/
+   height: 600px;
+   width:100%;
+   /*Set and adjust background image*/
+   background-image: url("https://previews.123rf.com/images/lightfieldstudios/lightfieldstudios1709/lightfieldstudios170901728/85275135-cutting-board-vegetables-and-herbs.jpg");
+   background-size: cover;
+   opacity: 0.9;
+   /*Text properties for itself and all children elements*/
+   color: white;
+   text-align: center;
+   font-family: 'Blinker', sans-serif;
+}
+header p {
+   /* Add the font-style property here*/
+	font-style: italic;
+}
