@@ -13,12 +13,23 @@ def getRecipeFrom(query):
     json_response = content.json()
     return json_response
 
+
 def getTitle(query):
     json_response = getRecipeFrom(query)
     results = json_response['results']
+    title_list = []
     for item in results:
-        print(item['title'])
-    
+        title_list.append(item['title'])
+    return title_list
+
+
+def getInfo(query):
+    json_response = getRecipeFrom(query)
+    title = json_response['title']
+    timePrepMin = json_response['readyInMinutes']
+    numServings = json_response['servings']
+    image = json_response['image']
+
 # def getPrepTime(query):
 #     pass
 

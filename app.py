@@ -20,6 +20,7 @@ def index():
 @app.route('/results', methods=['POST', 'GET'])
 def results():
     recipe = model.getRecipeFrom(request.form['foodQ'])
-    title = model.getTitle(request.form['foodQ'])
-    return render_template('results.html', recipe = recipe, title = title)
+    # title = model.getTitle(request.form['foodQ'])
+    # print(title)
+    return render_template('results.html', recipe=recipe)
 
