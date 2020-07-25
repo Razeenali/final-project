@@ -35,10 +35,6 @@ def getRecipeFrom(query):
 #     return prepTime_list
 
 
-# def getNumServings(query):
-#     pass
-
-
 def getInfo(query):
     json_response = getRecipeFrom(query)
     list_dishes = []

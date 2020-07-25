@@ -66,3 +66,7 @@ header p {
    /* Add the font-style property here*/
 	font-style: italic;
 }
+
+#results_container {
+    background-color: black;
+}
