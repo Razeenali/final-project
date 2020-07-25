@@ -19,8 +19,10 @@ def index():
 
 @app.route('/results', methods=['POST', 'GET'])
 def results():
-    recipe = model.getRecipeFrom(request.form['foodQ'])
+    # recipe = model.getRecipeFrom(request.form['foodQ'])
     # title = model.getTitle(request.form['foodQ'])
-    # print(title)
-    return render_template('results.html', recipe=recipe)
-
+    # prepTime = model.getPrepTime(request.form['foodQ'])
+    # numServings = model.getNumServings(request.form['foodQ'])
+    # print(type(title))
+    info = model.getInfo(request.form['foodQ'])
+    return render_template('results.html', info=info)

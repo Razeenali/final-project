@@ -41,12 +41,15 @@
             <div class="container">
                 <h1>FOODOM</h1>
                 <p>To make the user experience with food clean and simple. Whether you want to take out or cook from the comfort of your home, we got you covered. </p>
+                <div class = "justify-content-center">
+                    <form method = 'POST' action = '/results'>
+                        <input class="form-control form-control-lg" type = 'text' name = 'foodQ'>
+                        <input type = 'submit' value = 'Submit'>
+                    </form>
+                </div>
             </div>
         </header>
         </section>
-        <form method = 'POST' action = '/results'>
-            <input type = 'text' name = 'foodQ'>
-            <input type = 'submit' value = 'Submit'>
-        </form>
+
     </body>
 </html>
