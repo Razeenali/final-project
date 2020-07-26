@@ -13,10 +13,10 @@
     <body>
         <div class="container">
             <h1>Recipes Page</h1>
-            <div id="results_container" style="background-color:#ffb3ab;">
+            <div>
                 <div class="row">
                     {%for dish in list_dishes%}
-                        <div class="col-sm-3" style = "border: 5px solid black;">
+                        <div class="col-sm-3">
                             <p>ID: {{dish['id']}}</p>
                             <p>Dish: {{dish['title']}}</p>
                             <p>Prep Time: {{dish['readyInMinutes']}} minutes</p>

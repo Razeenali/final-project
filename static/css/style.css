@@ -2,19 +2,19 @@
 {
     margin: 0;
     padding:0;
-
 }
 body{
     font-family: sans-serif;
-    text-align: center;
+    background-color: #ecc0f7;
 }
 #nav-bar{
     position: sticky;
     top:0;
     z-index: 10;
 }
-.navbar{
-    background: linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%);
+.navbar{   
+    background-color: #ff8888;
+    background-image: linear-gradient(315deg, #ffdfdf 0%, #7e0505 74%);
     padding:0 !important;
 }
 .navbar-brand img{
@@ -25,22 +25,20 @@ body{
     padding:0 10px;
 }
 .navbar-nav li a{
-    color: white !important;
+    color: #fff !important;
     font-weight: 600;
     float: right;
     text-align: left;
 }
 .fa-bars{
 /* the color of the three lines */
-color:#333;
+color: #fff;
 font-size: 30px !important;
 }
 .navbar-toggler{
     outline: none !important;
 }
-
 /*************header section *****************/
-
 /* #banner{
     background-image: linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%);
     color: blue;
@@ -56,8 +54,7 @@ header{
    height: 600px;
    width:100%;
    /*Set and adjust background image*/
-   background-image: url("https://previews.123rf.com/images/lightfieldstudios/lightfieldstudios1709/lightfieldstudios170901728/85275135-cutting-board-vegetables-and-herbs.jpg");
-   /* background-image: url("https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/NFOJ7HCOWQI6VFT34B2NGAWH2Q.jpg&w=530"); */
+   background-image: url("https://ak.picdn.net/shutterstock/videos/1040092985/thumb/1.jpg");
    background-size: cover;
    opacity: 0.9;
    /*Text properties for itself and all children elements*/
@@ -67,9 +64,64 @@ header{
 }
 header p {
    /* Add the font-style property here*/
-	font-style: italic;
+    font-style: italic;
 }
-
-#results_container {
-    background-color: black;
+/****************** Mission Section *******************/
+#mission{
+    padding: 0;
+}
+.mission-img{
+    width: 100px;
+    margin-top: 20px;
+}
+.mission{
+    padding: 20px;
+}
+.mission h4{
+    padding: 5px;
+    margin-top: 25px;
+}
+.title::before{
+    content:"";
+    background: 
+    height: 5px;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    transform: translateY(36px);
+}
+.title::after{
+    content:"";
+    background: 
+    height: 10px;
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    display: block;
+    transform: translateY(8px);
+}
+/********************* About Us ******************/
+#about-us{
+    background: #F8F9FA;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+/****************** Social Media *******************/
+#social-media{
+    background: #F8F9FA;
+    padding: 100px 0;
+}
+#social-media p{
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+.social-icons img{
+    width: 60px;
+    transition: 0.5s;
+}
+.social-icons a:hover img{
+    transform: translateY(-10px)
 }
