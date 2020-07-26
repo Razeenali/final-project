@@ -2,9 +2,11 @@
 {
     margin: 0;
     padding:0;
+
 }
 body{
     font-family: sans-serif;
+    text-align: center;
 }
 #nav-bar{
     position: sticky;
@@ -55,6 +57,7 @@ header{
    width:100%;
    /*Set and adjust background image*/
    background-image: url("https://previews.123rf.com/images/lightfieldstudios/lightfieldstudios1709/lightfieldstudios170901728/85275135-cutting-board-vegetables-and-herbs.jpg");
+   /* background-image: url("https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/NFOJ7HCOWQI6VFT34B2NGAWH2Q.jpg&w=530"); */
    background-size: cover;
    opacity: 0.9;
    /*Text properties for itself and all children elements*/
