@@ -15,9 +15,10 @@
             <h1>Recipes Page</h1>
             <div id="results_container" style="background-color:#ffb3ab;">
                 <div class="row">
-                    {%for dish in info%}
+                    {%for dish in list_dishes%}
                         <div class="col-sm-3" style = "border: 5px solid black;">
-                            <p> Dish: {{dish['title']}} </p>
+                            <p>ID: {{dish['id']}}</p>
+                            <p>Dish: {{dish['title']}}</p>
                             <p>Prep Time: {{dish['readyInMinutes']}} minutes</p>
                             <p>Number of Servings: {{dish['servings']}}</p>
                             <a href = "{{dish['sourceUrl']}}">Click here to learn more</a>
