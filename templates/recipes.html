@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Results Page</title>
+        <title>Recipes Page</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -12,15 +12,16 @@
     </head>
     <body>
         <div class="container">
-            <h1>Results Page</h1>
+            <h1>Recipes Page</h1>
             <div id="results_container" style="background-color:#ffb3ab;">
                 <div class="row">
                     {%for dish in info%}
                         <div class="col-sm-3" style = "border: 5px solid black;">
-                            <p> Title: {{dish['title']}} </p>
-                            <p>Time to prep: {{dish['readyInMinutes']}} minutes</p>
-                            <p>Number of servings: {{dish['servings']}}</p>
-                            <!-- {{dish['sourceUrl']}} -->
+                            <p> Dish: {{dish['title']}} </p>
+                            <p>Prep Time: {{dish['readyInMinutes']}} minutes</p>
+                            <p>Number of Servings: {{dish['servings']}}</p>
+                            <a href = "{{dish['sourceUrl']}}">Click here to learn more</a>
+                            <img src = "https://spoonacular.com/recipeImages/{{dish['image']}}" width="100%" alt = "image of {{dish['title']}}">
                         </div>
                     {%endfor%}
                 </div>

@@ -17,12 +17,12 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/results', methods=['POST', 'GET'])
-def results():
+@app.route('/recipes', methods=['POST', 'GET'])
+def recipes():
     # recipe = model.getRecipeFrom(request.form['foodQ'])
     # title = model.getTitle(request.form['foodQ'])
     # prepTime = model.getPrepTime(request.form['foodQ'])
     # numServings = model.getNumServings(request.form['foodQ'])
     # print(type(title))
     info = model.getInfo(request.form['foodQ'])
-    return render_template('results.html', info=info)
+    return render_template('recipes.html', info=info)
