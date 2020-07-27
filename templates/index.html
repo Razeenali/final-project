@@ -29,11 +29,29 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">log out</a>
+                    </li>
                     </ul>
                 </div>
             </nav>
         </section>
-
+        <!-- Example Login:
+        Username: user123
+        Password: 12345 -->
+        <!-- {%if session%} -->
+            <h1>Welcome User</h1>
+            <a class="btn btn-primary" href="/user_favorites" role="button">See your Favorites</a>
+        <!-- {%endif%} -->
+        <!-- {%if not session%} -->
+        <form method ="POST" action="/index">
+            <label for="username">User Name:</label>
+            <input type="text" name="username" value="">
+            <label for="password">Password:</label>
+            <input type="password" name="password" value="">
+            <input type="submit" value="Submit">
+        </form>
+        <!-- {%endif%} -->
         <!---------------- Mission section ---------------------->
         <section id="mission">
             <div class="container-flush text-center">

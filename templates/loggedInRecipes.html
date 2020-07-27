@@ -24,6 +24,11 @@
                             <p>Number of Servings: {{dish['servings']}}</p>
                             <a href = "{{dish['sourceUrl']}}">Click here to learn more</a>
                             </br>
+                            <form action = '/user_favorites' method='post'>
+                                <input type = "hidden" name = 'dishID' value="{{dish['id']}}">
+                                <button class="btn btn-primary" href = "/user_favorites" type = "submit">Add to favorites</button>
+
+                            </form>
                             <img src = "https://spoonacular.com/recipeImages/{{dish['image']}}" width="100%" alt = "image of {{dish['title']}}">
                         </div>
                     {%endfor%}

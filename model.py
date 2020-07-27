@@ -30,7 +30,12 @@ def getListDishes(query):
 
 
 # Get Recipe Information
-def getInformation(query):
-    content = requests.get(f'https://api.spoonacular.com/recipes/{query}/information?apiKey=4c93056742bb42a8a2536a91e6630495&includeNutrition=false')
+# def getInformation(query):
+#     content = requests.get(f'https://api.spoonacular.com/recipes/{query}/information?apiKey=4c93056742bb42a8a2536a91e6630495&includeNutrition=false')
+#     json_response = content.json()
+#     return json_response
+
+def getFavorite(iden):
+    content = requests.get(f'https://api.spoonacular.com/recipes/{iden}/information?apiKey=4c93056742bb42a8a2536a91e6630495&includeNutrition=false')
     json_response = content.json()
     return json_response
