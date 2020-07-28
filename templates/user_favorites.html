@@ -4,25 +4,25 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+    <link rel='stylesheet' type = 'text/css' href='../static/style.css'
     <title>User Favorites Page</title>
   </head>
   <body>
-    <h1>These are your Favorites</h1>
-    <div class="row">
-    {%for food in foods%}
-        <div class="col-sm-3">
-            <p>Dish ID: {{food['Dish ID']}}</p>
-            <p>Dish Title: {{food['Dish title:']}}</p>
-            <p>Ingredients:</p>
-            {%for ingredient in food['ingredients']%}
-                <p>{{ingredient}}</p>
-            {%endfor%}
+    
+    <div class = 'container'>
+        <div class = 'row'>
+            <h1>These are your Favorites</h1>
         </div>
-    {%endfor%}
+        <div class="row">
+        {%for food in fav_foods%}
+            <div class = "col-md-3">
+                <h2>{{food['Dish title']}}</h2>
+                <!-- <h2>{{food['Dish title']}}</h2> -->
+            </div>
+        {%endfor%}
+        </div>
     </div>
 
     <!-- Optional JavaScript -->

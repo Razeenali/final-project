@@ -2,11 +2,12 @@
 <html>
     <head>
         <title>Home Page</title>
-        <link rel="stylesheet" href="static/css/style.css">
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type = 'text/css' href="../static/style.css">
     </head>
     <body>
         <section id="nav-bar">
@@ -28,8 +29,12 @@
                     </li>
                     {%if session%}
                         <li class="nav-item">
+                            <a class="nav-link" href="/user_favorites">Favorites</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/logout">log out</a>
                         </li>
+                        
                     {%endif%}
                     </ul>
                 </div>
@@ -83,7 +88,7 @@
             </div>
         </section>
 
-        <header class="d-flex align-items-center"> <!-- Alternative background image: style="background-image: url('../static/images/board.jpg')" -->
+        <header class="d-flex align-items-center" style="background-image: url('../static/images/board.jpg')"> <!-- Alternative background image: style="background-image: url('../static/images/board.jpg')" -->
             <div class="container">
                 <h1>YASMAR NODROG</h1>
                 <p>Cooking has never been easier than before. Search for recipes by dish name or search for dishes by ingredient name!</p>

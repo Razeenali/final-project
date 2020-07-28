@@ -39,21 +39,21 @@ def index():
         session.clear()
         return render_template('index.html')
     return render_template('index.html')
-    
+
 
 # CONNECT TO DB, ADD DATA
 # Allows login user to see their custom set of favorite foods
 # For a given collection called 'user' inside the database 'user_favorites'
-# create a (if not already existing) collection that contains key value pairs as follows:
-# 
+# add to collection that contains key value pairs
 @app.route('/user_favorites', methods=['POST', 'GET'])
 def user_favorites():
+    username = session["username"]
     # list of ingredients for chosen favorite dish to add
     user_fav_ingredients = []
-    if session:
+    if 'username' in session:
         if request.method == 'GET':
-            session.clear()
-            return render_template('index.html')
+            # session.clear()
+            return render_template('user_favorites.html')
         else:
             dishID = request.form['dishID']
             # list of dictionaries representing ingredients
@@ -64,16 +64,12 @@ def user_favorites():
                 user_fav_ingredients.append(ing['originalString'])
             # collection of users
             collection = mongo.db.users
-
-            # Add list of favorite dish information to session user collection with given username
-            # if no such user exists, create the user and insert such information
-
-            # (Have to test) but.....HOW TO GET '$set' operator to work?????????
-            # collection.update({username: 'username'}, { $set: {"Dish ID": dishID, "Dish title:": model.getFavorite(dishID)['title'], "ingredients": user_fav_ingredients}})
-
-            # (NOT WHAT WE WANT) inserts an object containing dish id, title, and list of ingredient into collection 'users'
-            collection.insert({"Dish ID": dishID, "Dish title:": model.getFavorite(dishID)['title'], "ingredients": user_fav_ingredients})
-            return render_template('user_favorites.html', dishID=dishID, ingredients=ingredients, user_fav_ingredients=user_fav_ingredients)
+            # specific session user document with given username
+            # Add list of favorite dish information to session user document
+            collection.update_one({'username': username}, { '$push': {"favFood": {"Dish ID": dishID, "Dish title": model.getFavorite(dishID)['title'], "ingredients": user_fav_ingredients}}})
+            user_document = list(collection.find({'username':username}))
+            print(user_document[0]['favFood'])
+            return render_template('user_favorites.html', fav_foods=user_document[0]['favFood'])
     else:
         return "You are not logged in! Go to <a href='/index'>home</a>."
 
@@ -84,14 +80,15 @@ def loginsignup():
     if request.method == 'GET':
         return render_template('loginsignup.html')
     else:
+        array = []
         username = request.form["username"]
         password = request.form["password"]
         collection = mongo.db.users
         user = list(collection.find({"username":username}))
         if len(user) == 0:
-            collection.insert_one({"username": username, "password": str(bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()), 'utf-8')})
+            collection.insert_one({"username": username, "password": str(bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()), 'utf-8'), "favFood": array})
             session["username"] = username
-            return "You are logged in.  Go to <a href='/index'>home</a>."
+            return "You have successfully created an account and are logged in.  Go to <a href='/index'>home</a>."
         elif bcrypt.hashpw(password.encode('utf-8'), user[0]['password'].encode('utf-8')) == user[0]['password'].encode('utf-8'):
             session["username"] = username
             return "Welcome back  Go to <a href='/index'>home</a>."
