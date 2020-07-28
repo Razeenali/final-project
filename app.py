@@ -1,13 +1,9 @@
 # ---- YOUR APP STARTS HERE ----
 # -- Import section --
-from flask import Flask
-from flask import render_template
-from flask import request
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_pymongo import PyMongo
 import model
-from flask import session
 import bcrypt
-from flask import redirect, url_for
 
 
 # -- Initialization section --
@@ -34,20 +30,59 @@ mongo = PyMongo(app)
 
 # -- Routes section --
 # index or Home page
-# @app.route('/')
-# @app.route('/index')
-# def index():
-#     collection = mongo.db.events
-#     events = collection.find({})
-#     return render_template('index.html', events=events)
 @app.route('/')
-@app.route('/index', methods=['POST', 'GET'])
+@app.route('/index')
 def index():
+    # collection = mongo.db.events
+    # events = collection.find({})
+    if request.method == 'POST':
+        session.clear()
+        return render_template('index.html')
+    return render_template('index.html')
+    
 
-    collection = mongo.db.events
-    events = collection.find({})
+# CONNECT TO DB, ADD DATA
+# Allows login user to see their custom set of favorite foods
+# For a given collection called 'user' inside the database 'user_favorites'
+# create a (if not already existing) collection that contains key value pairs as follows:
+# 
+@app.route('/user_favorites', methods=['POST', 'GET'])
+def user_favorites():
+    # list of ingredients for chosen favorite dish to add
+    user_fav_ingredients = []
+    if session:
+        if request.method == 'GET':
+            session.clear()
+            return render_template('index.html')
+        else:
+            dishID = request.form['dishID']
+            # list of dictionaries representing ingredients
+            ingredients = model.getFavorite(dishID)['extendedIngredients']
+            # obtain string description from each ingredient dictionary
+            # and add to user_fav_ingredients list
+            for ing in ingredients:
+                user_fav_ingredients.append(ing['originalString'])
+            # collection of users
+            collection = mongo.db.users
+
+            # Add list of favorite dish information to session user collection with given username
+            # if no such user exists, create the user and insert such information
+
+            # (Have to test) but.....HOW TO GET '$set' operator to work?????????
+            # collection.update({username: 'username'}, { $set: {"Dish ID": dishID, "Dish title:": model.getFavorite(dishID)['title'], "ingredients": user_fav_ingredients}})
+
+            # (NOT WHAT WE WANT) inserts an object containing dish id, title, and list of ingredient into collection 'users'
+            collection.insert({"Dish ID": dishID, "Dish title:": model.getFavorite(dishID)['title'], "ingredients": user_fav_ingredients})
+            return render_template('user_favorites.html', dishID=dishID, ingredients=ingredients, user_fav_ingredients=user_fav_ingredients)
+    else:
+        return "You are not logged in! Go to <a href='/index'>home</a>."
+
+
+@app.route('/loginsignup', methods=['GET', 'POST'])
+def loginsignup():
+    session.clear()
     if request.method == 'GET':
-        return render_template('index.html', events=events)
+        return render_template('loginsignup.html')
     else:
         username = request.form["username"]
         password = request.form["password"]
@@ -56,14 +91,10 @@ def index():
         if len(user) == 0:
             collection.insert_one({"username": username, "password": str(bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()), 'utf-8')})
             session["username"] = username
-            # return "You are logged in.  Go to <a href='/index'>home</a>."
-            return render_template('index.html', events=events)
+            return "You are logged in.  Go to <a href='/index'>home</a>."
         elif bcrypt.hashpw(password.encode('utf-8'), user[0]['password'].encode('utf-8')) == user[0]['password'].encode('utf-8'):
             session["username"] = username
-            print(session["username"])
-            print(session)
-            # return "Welcome back  Go to <a href='/index'>home</a>."
-            return render_template('index.html', events=events)
+            return "Welcome back  Go to <a href='/index'>home</a>."
         else:
             return "Error"
 
@@ -76,7 +107,6 @@ def user_information():
         return render_template('index.html')
     else:
         user_email = request.form['user_email']
-
         collection = mongo.db.events
         collection.insert({"email": user_email})
         user_information = collection.find({})
@@ -92,29 +122,6 @@ def recipes():
         return render_template('loggedInRecipes.html', list_dishes=list_dishes)
     return render_template('recipes.html', list_dishes=list_dishes)
 
-
-# returns dict of ingredients given a dish ID
-@app.route('/ingredients', methods=['POST', 'GET'])
-def ingredients():
-    information = model.getInformation(request.form['dishID'])
-    print(type(information))
-    return render_template('ingredients.html', information=information)
-
-
-# Allows login user to see their custom set of favorite foods
-@app.route('/user_favorites', methods=['POST', 'GET'])
-def user_favorites():
-    user_fav_ingredients = []
-    if 'username' in session:
-        collection = mongo.db.foods
-        dishID = request.form['dishID']
-        ingredients = model.getFavorite(dishID)['extendedIngredients']
-        for ing in ingredients:
-            user_fav_ingredients.append(ing['originalString'])
-        collection.insert({"Dish ID": dishID, "Dish title:": model.getFavorite(dishID)['title'], "ingredients": user_fav_ingredients})
-        foods = collection.find({})
-        return render_template('user_favorites.html', dishID=dishID, ingredients=ingredients, foods=foods, user_fav_ingredients=user_fav_ingredients)
-    return 'error'
 
 @app.route('/logout')
 def logout():

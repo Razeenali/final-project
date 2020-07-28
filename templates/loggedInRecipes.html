@@ -11,12 +11,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container">
+        <div class="container border border-primary" "recipes_container">
             <h1>Recipes Page</h1>
             <div>
                 <div class="row">
                     {%for dish in list_dishes%}
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 d-flex flex-column border border-primary">
                             
                             <p>ID: {{dish['id']}}</p>
                             <p>Dish: {{dish['title']}}</p>
@@ -26,10 +26,10 @@
                             </br>
                             <form action = '/user_favorites' method='post'>
                                 <input type = "hidden" name = 'dishID' value="{{dish['id']}}">
-                                <button class="btn btn-primary" href = "/user_favorites" type = "submit">Add to favorites</button>
+                                <button class="btn btn-primary" href = "user_favorites.html" type = "submit">Add to favorites</button>
 
                             </form>
-                            <img src = "https://spoonacular.com/recipeImages/{{dish['image']}}" width="100%" alt = "image of {{dish['title']}}">
+                            <img src = "https://spoonacular.com/recipeImages/{{dish['image']}}" class="img-fluid" width="100%" alt = "image of {{dish['title']}}">
                         </div>
                     {%endfor%}
                 </div>

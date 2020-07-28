@@ -4,9 +4,9 @@
         <title>Home Page</title>
         <link rel="stylesheet" href="static/css/style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <section id="nav-bar">
@@ -21,17 +21,16 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">Features</a>
+                        <a class="nav-link" href="#about-us">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about-us">About US</a>
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">log out</a>
-                    </li>
+                    {%if session%}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">log out</a>
+                        </li>
+                    {%endif%}
                     </ul>
                 </div>
             </nav>
@@ -39,19 +38,19 @@
         <!-- Example Login:
         Username: user123
         Password: 12345 -->
-        <!-- {%if session%} -->
-            <h1>Welcome User</h1>
-            <a class="btn btn-primary" href="/user_favorites" role="button">See your Favorites</a>
-        <!-- {%endif%} -->
-        <!-- {%if not session%} -->
-        <form method ="POST" action="/index">
-            <label for="username">User Name:</label>
-            <input type="text" name="username" value="">
-            <label for="password">Password:</label>
-            <input type="password" name="password" value="">
-            <input type="submit" value="Submit">
-        </form>
-        <!-- {%endif%} -->
+        {%if not session%}
+            <div class = 'container' id = 'login'>
+                <form method ="POST" action="/loginsignup">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" value="">
+                    </br>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" value="">
+                    </br>
+                    <input class = "btn btn-secondary" type="submit" value="Log In">
+                </form>
+            </div>
+        {%endif%}
         <!---------------- Mission section ---------------------->
         <section id="mission">
             <div class="container-flush text-center">
@@ -60,9 +59,13 @@
                     <h1 class="title">Our Mission</h1>
                     <div class="container">
                         <div class="row">
-                            <p>Cooking as a family or with friends and loved ones brings us together because we are able to share our
+                            <!-- <p>Cooking as a family or with friends and loved ones brings us together because we are able to share our
                                 culture and heritage through food and give each other nourishment. ... Food is also a great vehicle for
-                                sharing culture with people from different backgrounds.</p>
+                                sharing culture with people from different backgrounds.</p> -->
+                            <h4>
+                                Food brings us together. At YASMAR NODROG, we believe strongly in easy to access recipes and resources that will provide you with everything
+                                you need to make your next food gathering unforgettable.
+                            </h4>
                         </div>
                     </div>
                     <div class="carousel-inner">
@@ -80,61 +83,20 @@
             </div>
         </section>
 
-        <header class="d-flex align-items-center">
+        <header class="d-flex align-items-center"> <!-- Alternative background image: style="background-image: url('../static/images/board.jpg')" -->
             <div class="container">
                 <h1>YASMAR NODROG</h1>
                 <p>Cooking has never been easier than before. Search for recipes by dish name or search for dishes by ingredient name!</p>
-                <div class = "justify-content-center">
+                <div class = "container">
                     <form method = 'POST' action = '/recipes'>
                         <input class="form-control form-control-lg" type = 'text' name = 'foodQ'>
                         <input class = "btn btn-info" type = 'submit' value = 'Submit'>
                     </form>
-                    <p>OR Enter dish ID to search for ingredients</p>
-                    <form method = 'POST' action = '/ingredients'>
-                        <input class="form-control form-control-lg" type = 'number' name = 'dishID'>
-                        <input class = "btn btn-info" type = 'submit' value = 'Submit'>
-                    </form>
                 </div>
+
+
             </div>
         </header>
-
-        <!-- Top Dishes Section
-
-        <div class="container" id = "top_dishes">
-            <h2>Top Dishes Weekly</h2>
-            <div class="row">
-                <div class="col-sm">
-                    <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
 
         <!-- -------------------------- About Us ------------------ -->
         <section id="about-us">
@@ -144,8 +106,8 @@
                     <div class="col-md-6 align-self-center about-us">
                         <h2>Cooking can be difficult.</h2>
                         <h2>But it doesn't have to be.</h2>
-                        <h3>Learn to cook with no other culinary chef than Gordon Ramsay</h3>
-                        <a href="https://www.masterclass.com/classes/gordon-ramsay-teaches-cooking">Gordon Ramsay's Master Class</a>
+                        <h2>Learn to cook with no other culinary chef than Gordon Ramsay</h3>
+                        <a class="btn btn-primary" href="https://www.masterclass.com/classes/gordon-ramsay-teaches-cooking" role="button">Gordon Ramsay's Master Class</a>
                     </div>
                     <div class="col-md-6 about-us">
                         <img src="../static/images/ramsay.jpg" class="img-fluid">
@@ -160,6 +122,7 @@
             <div class="container text-center"> 
             <p>FIND US ON SOCIAL MEDIA</p>
                 <div class="social-icons">
+                <a class="btn-floating btn-lg btn-fb" type="button" role="button" href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><img scr="" ></a>
                 <a href="#"><img scr="" ></a>
                 <a href="#"><img scr="" ></a>
@@ -169,183 +132,50 @@
                 </div>
             </div>
         </section>
-        <!----------------- footer section -------------->
-        <!-- Footer -->
-        <footer class="page-footer font-small mdb-color pt-4">
 
-            <!-- Search and Email Sign up -->
 
-            <!-- Footer Elements -->
-            <div class="container">
 
-                <!--Grid row-->
-                <div class="row">
-
-                <!--Grid column-->
-                <div class="col-md-6 mb-4">
-
-                    <!-- Form -->
-                    <form class="form-inline">
-                    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-                        aria-label="Search">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                    </form>
-                    <!-- Form -->
-
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-md-6 mb-4">
-
-                    <form method = "post" action = "/user_information" class="input-group"> <!--  class="input-group" -->
-                        <input type="text" placeholder="Your email" name="user_email" value=""
-                            aria-label="Your email" aria-describedby="basic-addon2"> <!-- class="form-control form-control-sm" -->
-                        <div>
-                            <a class="btn btn-primary" href = "/successSignUp.html" role="button" type = "submit">Sign up</a>
+        <!-- Footer ---------->
+        <footer>
+            <div class="footer" id="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <h4> YASMAR NODROG </h4>
                         </div>
-                    </form>
-
+                        <div class="col-lg-3 col-sm-2 col-xs-3">
+                            <h3> Contact </h3>
+                            <ul>
+                                <li><a class="email"href="#"> insert email here </a></li>
+                                <br/>
+                                <li> <p> address line one </p> </li>
+                                <li> <p> address line two </p> </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-sm-2 col-xs-3">
+                            <ul>
+                                <li> <h5> <a href="#" style="margin-top: 5em"> ABOUT US</a> <h5></li>
+                                <li> <h5><a href="#"> CURRENT SERIES </a> <h5></li>
+                                <li> <h5><a href="#"> THE HOUSE </a> <h5></li>
+                                <li> <h5><a href="#"> LOOKING BACK </a> <h5></li>
+                            </ul>
+                        </div>
+                    
+                    <!--/.row--> 
                 </div>
-                <!--Grid column-->
-
-                </div>
-                <!--Grid row-->
-
+                <!--/.container--> 
             </div>
-
-            <!-- Footer Links -->
-            <div class="container text-center text-md-left">
-
-                <!-- Footer links -->
-                <div class="row text-center text-md-left mt-3 pb-3">
-
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">Company name</h6>
-                    <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                    consectetur
-                    adipisicing elit.</p>
+            <!--/.footer-->
+                                
+            <div class="footer-bottom">
+                <div class="container">
+                    <p class="pull-left copyright"> Copyright © Footer 2014. All right reserved. </p>
+            
                 </div>
-                <!-- Grid column -->
-
-                <hr class="w-100 clearfix d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-                    <p>
-                    <a href="#!">MDBootstrap</a>
-                    </p>
-                    <p>
-                    <a href="#!">MDWordPress</a>
-                    </p>
-                    <p>
-                    <a href="#!">BrandFlow</a>
-                    </p>
-                    <p>
-                    <a href="#!">Bootstrap Angular</a>
-                    </p>
-                </div>
-                <!-- Grid column -->
-
-                <hr class="w-100 clearfix d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
-                    <p>
-                    <a href="#!">Your Account</a>
-                    </p>
-                    <p>
-                    <a href="#!">Become an Affiliate</a>
-                    </p>
-                    <p>
-                    <a href="#!">Shipping Rates</a>
-                    </p>
-                    <p>
-                    <a href="#!">Help</a>
-                    </p>
-                </div>
-
-                <!-- Grid column -->
-                <hr class="w-100 clearfix d-md-none">
-
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                    <p>
-                    <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-                    <p>
-                    <i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-                    <p>
-                    <i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                    <p>
-                    <i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
-                </div>
-                <!-- Grid column -->
-
-                </div>
-                <!-- Footer links -->
-
-                <hr>
-
-                <!-- Grid row -->
-                <div class="row d-flex align-items-center">
-
-                <!-- Grid column -->
-                <div class="col-md-7 col-lg-8">
-
-                    <!--Copyright-->
-                    <p class="text-center text-md-left">© 2020 Copyright:
-                    <a href="https://mdbootstrap.com/">
-                        <strong> MDBootstrap.com</strong>
-                    </a>
-                    </p>
-
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-5 col-lg-4 ml-lg-0">
-
-                    <!-- Social buttons -->
-                    <div class="text-center text-md-right">
-                    <ul class="list-unstyled list-inline">
-                        <li class="list-inline-item">
-                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        </li>
-                        <li class="list-inline-item">
-                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        </li>
-                        <li class="list-inline-item">
-                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                            <i class="fab fa-google-plus-g"></i>
-                        </a>
-                        </li>
-                        <li class="list-inline-item">
-                        <a class="btn-floating btn-sm rgba-white-slight mx-1">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        </li>
-                    </ul>
-                    </div>
-
-                </div>
-                <!-- Grid column -->
-
-                </div>
-                <!-- Grid row -->
-
             </div>
-            <!-- Footer Links -->
+            <!--/.footer-bottom--> 
 
         </footer>
-        <!-- Footer -->
 
 
     </body>

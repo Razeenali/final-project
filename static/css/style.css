@@ -1,44 +1,53 @@
 *
 {
     margin: 0;
-    padding:0;
+    padding: 0;
+    text-align: center;
+    background-color: #ebfffa;
 }
 body{
     font-family: sans-serif;
-    background-color: #ecc0f7;
 }
-#nav-bar{
-    position: sticky;
-    top:0;
-    z-index: 10;
-}
+
 .navbar{   
     background-color: #ff8888;
     background-image: linear-gradient(315deg, #ffdfdf 0%, #7e0505 74%);
     padding:0 !important;
 }
+
+#nav-bar{
+    position: sticky;
+    top:0;
+    z-index: 10;
+}
+
 .navbar-brand img{
     height: 40px;
     padding-left: 20px;
 }
+
 .navbar-nav li{
     padding:0 10px;
 }
+
 .navbar-nav li a{
     color: #fff !important;
     font-weight: 600;
     float: right;
     text-align: left;
 }
+
 .fa-bars{
 /* the color of the three lines */
 color: #fff;
 font-size: 30px !important;
 }
+
 .navbar-toggler{
     outline: none !important;
 }
-/*************header section *****************/
+
+/* ************header section *****************/
 /* #banner{
     background-image: linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%);
     color: blue;
@@ -54,7 +63,8 @@ header{
    height: 600px;
    width:100%;
    /*Set and adjust background image*/
-   background-image: url("https://ak.picdn.net/shutterstock/videos/1040092985/thumb/1.jpg");
+   /* background-image: url("https://ak.picdn.net/shutterstock/videos/1040092985/thumb/1.jpg"); */
+   /* background-image: url('images/board.jpg') */
    background-size: cover;
    opacity: 0.9;
    /*Text properties for itself and all children elements*/
@@ -66,6 +76,17 @@ header p {
    /* Add the font-style property here*/
     font-style: italic;
 }
+
+#login {
+    text-align: center;
+}
+
+#recipes_container {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
 /****************** Mission Section *******************/
 #mission{
     padding: 0;
@@ -125,3 +146,125 @@ header p {
 .social-icons a:hover img{
     transform: translateY(-10px)
 }
+
+
+/* Style all font awesome icons */
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/**************************************** Footer ***************************************/
+.full {
+    width: 100%;    
+}
+.gap {
+	height: 30px;
+	width: 100%;
+	clear: both;
+	display: block;
+}
+.footer {
+	background: #002147;
+	height: auto;
+	padding-bottom: 30px;
+	position: relative;
+	width: 100%;
+	border-bottom: 1px solid #CCCCCC;
+	border-top: 1px solid #DDDDDD;
+}
+.footer p {
+	margin: 0;
+}
+.footer img {
+	max-width: 100%;
+}
+.footer h3 {
+	color: white;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 27px;
+	padding: 40px 0 0px;
+	text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.footer h4 {
+	color: white;
+	font-size: 2em;
+	font-weight: 600;
+	line-height: 38px;
+	padding: 40px 0 10px;
+	font-family: cursive;
+  font-weight: lighter
+}
+
+.footer ul {
+	font-size: 13px;
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+	margin-top: 0px;
+	color: #7F8C8D;
+  padding: 0 0 8px 0;
+}
+
+.email{
+  border-bottom: 3px solid #fff;
+}
+.footer ul li a {
+	padding: 0 0 12px 0;
+	display: block;
+}
+.footer a {
+	color: white;
+  font-weight: lighter;
+}
+
+.footer p {
+	color: white;
+  font-weight: lighter;
+  font-size: 
+}
+
+.footer a:hover {
+	text-decoration:none;
+  font-weight: bold;
+}
+.supportLi h4 {
+	font-size: 20px;
+	font-weight: lighter;
+	line-height: normal;
+	margin-bottom: 0 !important;
+	padding-bottom: 0;
+}
+
+.bg-gray {
+	background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
+	box-shadow: 0 1px 0 #B4B3B3;
+}
+
+}
+.footer a {
+	color: #78828D
+}
+
+.footer-bottom {
+  margin-top: 2em;
+	border-top: 1px solid #DDDDDD;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+.footer-bottom p.pull-left {
+	padding-top: 6px;
+  font-size: 0.75em
+}
+
