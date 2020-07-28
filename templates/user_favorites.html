@@ -13,12 +13,13 @@
     
     <div class = 'container'>
         <div class = 'row'>
-            <h1>These are your Favorites</h1>
+            <h1>These are user {{username}}'s Favorites</h1>
         </div>
         <div class="row">
+
         {%for food in fav_foods%}
             <div class = "col-md-3">
-                <h2>{{food['Dish title']}}</h2>
+                <p>{{food['Dish title']}}</p>
                 <!-- <h2>{{food['Dish title']}}</h2> -->
             </div>
         {%endfor%}

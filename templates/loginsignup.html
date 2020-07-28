@@ -11,6 +11,15 @@
     <title>Login Page</title>
   </head>
   <body>
+      {% if session %} <!-- if user is either new or existing -->
+      <!-- welcome -->
+        <div>
+            <h1>Welcome to ...</h1>
+        </div>
+      {%else%}
+      <!-- error message wrong pw -->
+        <h1>You ENter the wrong pw</h1>
+      {%endif%}
 
 
     <!-- Optional JavaScript -->

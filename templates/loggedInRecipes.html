@@ -24,7 +24,7 @@
                             <p>Number of Servings: {{dish['servings']}}</p>
                             <a href = "{{dish['sourceUrl']}}">Click here to learn more</a>
                             </br>
-                            <form action = '/user_favorites' method='post'>
+                            <form action = '/user_favorites' method='POST'>
                                 <input type = "hidden" name = 'dishID' value="{{dish['id']}}">
                                 <button class="btn btn-primary" href = "user_favorites.html" type = "submit">Add to favorites</button>
 

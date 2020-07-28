@@ -1,6 +1,6 @@
 # ---- YOUR APP STARTS HERE ----
 # -- Import section --
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 from flask_pymongo import PyMongo
 import model
 import bcrypt
@@ -52,24 +52,34 @@ def user_favorites():
     user_fav_ingredients = []
     if 'username' in session:
         if request.method == 'GET':
-            # session.clear()
-            return render_template('user_favorites.html')
+            collection = mongo.db.users
+            user_document = list(collection.find({'username':username}))
+            return render_template('user_favorites.html', fav_foods=user_document[0]['favFood'])
         else:
             dishID = request.form['dishID']
+            # print('Type of DishID: ' + type(dishID))
             # list of dictionaries representing ingredients
             ingredients = model.getFavorite(dishID)['extendedIngredients']
             # obtain string description from each ingredient dictionary
             # and add to user_fav_ingredients list
             for ing in ingredients:
                 user_fav_ingredients.append(ing['originalString'])
-            # collection of users
+            # users collection
             collection = mongo.db.users
             # specific session user document with given username
             # Add list of favorite dish information to session user document
-            collection.update_one({'username': username}, { '$push': {"favFood": {"Dish ID": dishID, "Dish title": model.getFavorite(dishID)['title'], "ingredients": user_fav_ingredients}}})
-            user_document = list(collection.find({'username':username}))
-            print(user_document[0]['favFood'])
-            return render_template('user_favorites.html', fav_foods=user_document[0]['favFood'])
+            # if dish not yet marked favorite
+            # print("Type of: collection.find({'username':username}))" + type(collection.find({'username':username})))
+            test = False
+            for dish_item in list(collection.find({'username':username}))[0]['favFood']:
+                if dish_item['Dish ID'] == dishID:
+                    test = True
+            if not test:
+                collection.update_one({'username': username}, { '$push': {"favFood": {"Dish ID": dishID, "Dish title": model.getFavorite(dishID)['title'], "ingredients": user_fav_ingredients}}})
+                user_document = list(collection.find({'username':username}))
+                print(user_document)
+                return render_template('user_favorites.html', fav_foods=user_document[0]['favFood'], username=username)
+            return 'Dish already exists'
     else:
         return "You are not logged in! Go to <a href='/index'>home</a>."
 
@@ -85,15 +95,17 @@ def loginsignup():
         password = request.form["password"]
         collection = mongo.db.users
         user = list(collection.find({"username":username}))
+        # if username does not exist already
         if len(user) == 0:
             collection.insert_one({"username": username, "password": str(bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()), 'utf-8'), "favFood": array})
             session["username"] = username
-            return "You have successfully created an account and are logged in.  Go to <a href='/index'>home</a>."
+            return render_template('loginsignup.html')
         elif bcrypt.hashpw(password.encode('utf-8'), user[0]['password'].encode('utf-8')) == user[0]['password'].encode('utf-8'):
             session["username"] = username
-            return "Welcome back  Go to <a href='/index'>home</a>."
+            return render_template('loginsignup.html')
         else:
-            return "Error"
+            return render_template('loginsignup.html')
+        return "Sorry, username already exists. Please try again! <a href='/index'>home</a>"
 
 
 # User email signup, adds user email to database 'user_information' and 
