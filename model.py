@@ -1,14 +1,18 @@
 import requests
 import spoonacular as sp
+import os
+from dotenv import load_dotenv
 
-# API key: 4c93056742bb42a8a2536a91e6630495
+load_dotenv()
+
+API_KEY = os.getenv("api_key")
 
 
 def getRecipeFrom(query):
-    api = sp.API("4c93056742bb42a8a2536a91e6630495")
+    api = sp.API({API_KEY})
     num_results = 20
     content = requests.get(
-        f"https://api.spoonacular.com/recipes/search?query={query}&number={num_results}&apiKey=4c93056742bb42a8a2536a91e6630495")
+        f"https://api.spoonacular.com/recipes/search?query={query}&number={num_results}&apiKey={API_KEY}")
     json_response = content.json()
     return json_response
 
@@ -21,13 +25,7 @@ def getListDishes(query):
     return list_dishes
 
 
-# Get Recipe Information
-# def getInformation(query):
-#     content = requests.get(f'https://api.spoonacular.com/recipes/{query}/information?apiKey=4c93056742bb42a8a2536a91e6630495&includeNutrition=false')
-#     json_response = content.json()
-#     return json_response
-
 def getFavorite(iden):
-    content = requests.get(f'https://api.spoonacular.com/recipes/{iden}/information?apiKey=4c93056742bb42a8a2536a91e6630495&includeNutrition=false')
+    content = requests.get(f'https://api.spoonacular.com/recipes/{iden}/information?apiKey={API_KEY}&includeNutrition=false')
     json_response = content.json()
     return json_response

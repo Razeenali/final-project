@@ -50,17 +50,7 @@ font-size: 30px !important;
     outline: none !important;
 }
 
-/* ************header section *****************/
-/* #banner{
-    background-image: linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%);
-    color: blue;
-    padding-top: 5%;
-}
-.promo{
-    font-size: 40px;
-    font-weight: 600;
-    margin-top: 100px; 
-} */
+
 header{
    /*Sizing of the element*/
    height: 600px;
@@ -149,6 +139,5 @@ header{
   opacity: 0.1;
 }
 
-/**************************************** Footer ***************************************/
 
 
