@@ -13,14 +13,6 @@ def getRecipeFrom(query):
     return json_response
 
 
-# def getListID(query):
-#     json_response = getRecipeFrom(query)
-#     list_ID = []
-#     for dish in json_response['results']:
-#         list_ID.append(dish['id'])
-#     return list_ID
-
-
 def getListDishes(query):
     json_response = getRecipeFrom(query)
     list_dishes = []

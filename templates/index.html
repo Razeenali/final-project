@@ -25,7 +25,7 @@
                         <a class="nav-link" href="#about-us">ABOUT</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">CONTACT</a>
+                        <a class="nav-link" href="#social-media">CONTACT</a>
                     </li>
                     {%if session%}
                         <li class="nav-item">
@@ -35,26 +35,16 @@
                             <a class="nav-link" href="/logout">LOG OUT</a>
                         </li>
                     {%endif%}
+                    {%if not session%}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#login">LOG IN</a>
+                        </li>
+                    {%endif%}
                     </ul>
                 </div>
             </nav>
         </section>
-        <!-- Example Login:
-        Username: user123
-        Password: 12345 -->
-        {%if not session%}
-            <div class = 'container' id = 'login'>
-                <form method ="POST" action="/loginsignup">
-                    <label for="username">Username:</label>
-                    <input type="text" name="username" value="">
-                    </br>
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" value="">
-                    </br>
-                    <input class = "btn btn-secondary" type="submit" value="Log In">
-                </form>
-            </div>
-        {%endif%}
+
         <!---------------- Mission section ---------------------->
         <section id="mission">
             <div class="container-flush text-center">
@@ -63,9 +53,6 @@
                     <h1 class="title">Our Mission</h1>
                     <div class="container">
                         <div class="row">
-                            <!-- <p>Cooking as a family or with friends and loved ones brings us together because we are able to share our
-                                culture and heritage through food and give each other nourishment. ... Food is also a great vehicle for
-                                sharing culture with people from different backgrounds.</p> -->
                             <h4>
                                 Food brings us together. At YASMAR NODROG, we believe strongly in easy to access recipes and resources that will provide you with everything
                                 you need to make your next food gathering unforgettable. To get started, enter a key ingredient or dish below. If you haven't already, we encourage
@@ -87,7 +74,7 @@
                 </div>
             </div>
         </section>
-
+        </br></br>
         <header class="d-flex align-items-center" style="background-image: url('../static/images/board.jpg')"> <!-- Alternative background image: style="background-image: url('../static/images/board.jpg')" -->
             <div class="container">
                 <h1>YASMAR NODROG</h1>
@@ -95,7 +82,7 @@
                 <div class = "container">
                     <form method = 'POST' action = '/recipes'>
                         <input class="form-control form-control-lg" type = 'text' name = 'foodQ'>
-                        <input class = "btn btn-info" type = 'submit' value = 'Submit'>
+                        <input class = "btn btn-danger" type = 'submit' value = 'Submit'>
                     </form>
                 </div>
 
@@ -112,7 +99,7 @@
                         <h2>Cooking can be difficult.</h2>
                         <h2>But it doesn't have to be.</h2>
                         <h2>Learn to cook with no other culinary chef than Gordon Ramsay</h3>
-                        <a class="btn btn-primary" href="https://www.masterclass.com/classes/gordon-ramsay-teaches-cooking" role="button">Gordon Ramsay's Master Class</a>
+                        <a class="btn btn-danger mb-3" href="https://www.masterclass.com/classes/gordon-ramsay-teaches-cooking" role="button">Gordon Ramsay's Master Class</a>
                     </div>
                     <div class="col-md-6 about-us">
                         <img src="../static/images/ramsay.jpg" class="img-fluid">
@@ -127,62 +114,61 @@
             <div class="container text-center"> 
             <p>FIND US ON SOCIAL MEDIA</p>
                 <div class="social-icons">
-                <a class="btn-floating btn-lg btn-fb" type="button" role="button" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><img scr="" ></a>
-                <a href="#"><img scr="" ></a>
-                <a href="#"><img scr="" ></a>
-                <a href="#"><img scr="" ></a>
-                <a href="#"><img scr="" ></a>
-                <a href="#"><img scr="" ></a>
+                <a class="btn-floating btn-lg btn-fb" type="button" role="button" href="#"></a>
+                <a href="#"><img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-facebook-4.png&r=255&g=48&b=48" alt="Italian Trulli"></a>
+                <a href="#"><img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2016/png/iconmonstr-instagram-14.png&r=255&g=48&b=48" alt="Italian Trulli"></a>
+                <a href="#"><img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-twitter-4.png&r=255&g=48&b=48" alt="Italian Trulli"></a>
+                <a href="#"><img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2016/png/iconmonstr-snapchat-4.png&r=255&g=48&b=48" alt="Italian Trulli"></a>
+                <a href="#"><img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2012/png/iconmonstr-linkedin-4.png&r=255&g=48&b=48" alt="Italian Trulli"></a>
+                <a href="#"><img src="https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2016/png/iconmonstr-whatsapp-4.png&r=255&g=48&b=48" alt="Italian Trulli"></a>
                 </div>
             </div>
         </section>
 
-
-
-        <!-- Footer ---------->
-        <footer>
-            <div class="footer" id="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <h4> YASMAR NODROG </h4>
-                            <h6>For general</h6>
+        <!--------------------------------- Footer -------------------------------------------->
+        <footer class="page-footer font-small special-color-dark pt-4 container text-center">
+            <!-- Footer Elements -->
+            <div class="container">
+                    <!--Grid column-->
+                    {%if not session%}
+                        <div class="col container text-center"> <!-- col-md-6 mb-4 -->
+                                <div id = 'login'>
+                                    <form method ="POST" action="/loginsignup">
+                                        <label for="username">Username:</label>
+                                        <input class='form-control form-control-sm' type="text" name="username" value="">
+                                        </br>
+                                        <label for="password">Password:</label>
+                                        <input class='form-control form-control-sm' type="password" name="password" value="">
+                                        </br>
+                                        <input class = "btn btn-secondary" type="submit" value="Log In">
+                                    </form>
+                                </div>
                         </div>
-                        <div class="col-lg-6 col-sm-4 col-xs-6">
-                            <h3> Sign up for our Email list!!!!</h3>
-                            <ul>
-                                <form method = "POST" action = "/successSignUp" name = "user_email">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!-- <li><a class="email" type = "text" href="/successSignUp" method = "POST">Email</a></li> -->
-                            </ul>
-                        </div>
-                        <!-- <div class="col-lg-3 col-sm-2 col-xs-3"> -->
-                            
-                        </div>
-                    
-                    <!--/.row--> 
-                </div>
-                <!--/.container--> 
+                    {%endif%}
+                    <!--Grid column-->
+                    <!--Grid column-->
+                    {%if session%}
+                    <div class="col container center"> 
+                        <h3> Sign up for our Email list!!!!</h3>
+                        <form method = "POST" action = "/successSignUp">
+                            <div>
+                                <input type="email" name = "user_email" class="form-control" aria-label="Your email">
+                                <button type="submit" class="btn btn-danger mt-3">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                    {%endif%}
+                
+            <!--Grid row-->
             </div>
-            <!--/.footer-->
-                                
-            <div class="footer-bottom">
-                <div class="container">
-                    <p class="pull-left copyright"> Copyright 2020. All right reserved. </p>
-            
-                </div>
+            <!-- Footer Elements -->
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a href="/index"> YASMAR NODROG</a>
             </div>
-            <!--/.footer-bottom--> 
-
-        </footer>
-
+            <!-- Copyright -->
+            </footer>
+        <!-- Footer -->
 
     </body>
 </html>

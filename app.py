@@ -5,32 +5,25 @@ from flask_pymongo import PyMongo
 import model
 import bcrypt
 import os
-
+from dotenv import load_dotenv
 
 # -- Initialization section --
 app = Flask(__name__)
 
+load_dotenv()
 
 # app secret key
-app.secret_key = 'eka23l2j1jkasd'
-# app.secret_key = os.environ['APP_SECRET_KEY']
+app.secret_key = os.getenv("APP_SECRET_KEY")
 
 
-# Names of databases
-# Stores user email signups
-app.config['MONGO_DBNAME'] = 'user_information'
-
-# Stores user login credentials (username, password) and their favorite foods
+# Database
+# Stores user login credentials (username, password), favorite foods, and email signups (if applicable)
 app.config['MONGO_DBNAME'] = 'user_favorites'
 
-# database user: admin
-# password: B6ZboUGoYAC0RVeq
-
-# db_password = os.environ["database_password"]
+db_password = os.getenv("database_password")
 
 # URI of database
-app.config['MONGO_URI'] = f'mongodb+srv://admin:B6ZboUGoYAC0RVeq@cluster0.34ojx.mongodb.net/user_information?retryWrites=true&w=majority'
-app.config['MONGO_URI'] = f'mongodb+srv://admin:B6ZboUGoYAC0RVeq@cluster0.34ojx.mongodb.net/user_favorites?retryWrites=true&w=majority'
+app.config['MONGO_URI'] = f'mongodb+srv://admin:{db_password}@cluster0.34ojx.mongodb.net/user_favorites?retryWrites=true&w=majority'
 
 mongo = PyMongo(app)
 
@@ -47,9 +40,7 @@ def index():
 
 
 # CONNECT TO DB, ADD DATA
-# Allows login user to see their custom set of favorite foods
-# For a given collection called 'user' inside the database 'user_favorites'
-# add to collection that contains key value pairs
+# Allows user to add to their collection of favorite foods
 @app.route('/user_favorites', methods=['POST', 'GET'])
 def user_favorites():
     username = session["username"]
@@ -85,6 +76,7 @@ def user_favorites():
         return "You are not logged in! Go to <a href='/index'>home</a>."
 
 
+# creates route for user login result page
 @app.route('/loginsignup', methods=['GET', 'POST'])
 def loginsignup():
     session.clear()
@@ -98,7 +90,7 @@ def loginsignup():
         user = list(collection.find({"username":username}))
         # if username does not exist already
         if len(user) == 0:
-            collection.insert_one({"username": username, "password": str(bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()), 'utf-8'), "favFood": array})
+            collection.insert_one({"username": username, "password": str(bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()), 'utf-8'), "favFood": array, "email": []})
             session["username"] = username
             return render_template('loginsignup.html')
         elif bcrypt.hashpw(password.encode('utf-8'), user[0]['password'].encode('utf-8')) == user[0]['password'].encode('utf-8'):
@@ -109,25 +101,18 @@ def loginsignup():
         return "Sorry, username already exists. Please try again! <a href='/index'>home</a>"
 
 
-@app.route('/successSignUp', methods=['GET', 'POST'])
-def successSignUp():
-    if request.method == "POST":
-        return render_template('successSignUp.html')
-    return render_template('index.html')
-
-
-# User email signup, adds user email to database 'user_information' and 
+# User email signup, adds user email to collection 'emails' and 
 # redirects to successSignUp.html to show successful signup
 @app.route('/successSignUp', methods=['GET', 'POST'])
-def user_information():
+def successSignUp():
+    username = session["username"]
     user_email = request.form['user_email']
     if request.method == 'GET':
         return render_template('index.html')
     else:
-        collection = mongo.db.emails
-        collection.insert({"email": user_email})
-        user_information = collection.find({})
-        return render_template('successSignUp.html', user_information=user_information)
+        collection = mongo.db.users
+        collection.update_one({'username': username}, {'$push': {"email": user_email}})
+        return render_template('successSignUp.html')
 
 
 # returns a list of dishes from API given a key word
