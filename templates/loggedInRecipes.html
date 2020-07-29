@@ -10,28 +10,28 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     </head>
-    <body>
+    <body class="greenBackground">
         <div class="container" "recipes_container">
             <h1>Recipes Page</h1>
             <div>
-                <div class="row">
-                    {%for dish in list_dishes%}
-                        <div class="col-sm-3 d-flex flex-column border border-primary">
-                            
-                            <p>ID: {{dish['id']}}</p>
-                            <p>Dish: {{dish['title']}}</p>
-                            <p>Prep Time: {{dish['readyInMinutes']}} minutes</p>
-                            <p>Number of Servings: {{dish['servings']}}</p>
-                            <a href = "{{dish['sourceUrl']}}">Click here to learn more</a>
-                            </br>
-                            <form action = '/user_favorites' method='POST'>
-                                <input type = "hidden" name = 'dishID' value="{{dish['id']}}">
-                                <button class="btn btn-primary" href = "user_favorites.html" type = "submit">Add to favorites</button>
-
-                            </form>
-                            <img src = "https://spoonacular.com/recipeImages/{{dish['image']}}" class="img-fluid" width="100%" alt = "image of {{dish['title']}}">
-                        </div>
-                    {%endfor%}
+                <div class="container d-flex justify-content-center">
+                    <div class="row">
+                        {%for dish in list_dishes%}
+                                    <div class="card" style="width: 15rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Dish: {{dish['title']}}</h5>
+                                            <p class="card-text">Prep Time: {{dish['readyInMinutes']}} minutes</p>
+                                            <p class="card-text">Number of Servings: {{dish['servings']}}</p>
+                                            <p class="card-text"><img src = "https://spoonacular.com/recipeImages/{{dish['image']}}" width="100%" alt = "image of {{dish['title']}}"></p>
+                                            <a href = "{{dish['sourceUrl']}}" class="btn btn-danger">Learn More</a>
+                                            <form action = '/user_favorites' method='POST'>
+                                                <input type = "hidden" name = 'dishID' value="{{dish['id']}}">
+                                                <button class="btn btn-primary" href = "user_favorites.html" type = "submit">Add to favorites</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                        {%endfor%}
+                    </div>
                 </div>
             </div>
             <hr/>
