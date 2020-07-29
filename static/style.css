@@ -5,9 +5,9 @@ body{
 }
 
 /* recipes and user_favorites page */
-.greenBackground {
+.pinkBackground {
     background: #ff8888;
-    text-align: center;
+    align-content: center;
 }
 
 #login_result {
