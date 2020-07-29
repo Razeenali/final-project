@@ -19,22 +19,21 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="#">HOME</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about-us">About</a>
+                        <a class="nav-link" href="#about-us">ABOUT</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="#contact">CONTACT</a>
                     </li>
                     {%if session%}
                         <li class="nav-item">
-                            <a class="nav-link" href="/user_favorites" method = 'POST'>Favorites</a>
+                            <a class="nav-link" href="/user_favorites" method = 'POST'>FAVORITES</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout">log out</a>
+                            <a class="nav-link" href="/logout">LOG OUT</a>
                         </li>
-                        
                     {%endif%}
                     </ul>
                 </div>
@@ -69,7 +68,8 @@
                                 sharing culture with people from different backgrounds.</p> -->
                             <h4>
                                 Food brings us together. At YASMAR NODROG, we believe strongly in easy to access recipes and resources that will provide you with everything
-                                you need to make your next food gathering unforgettable.
+                                you need to make your next food gathering unforgettable. To get started, enter a key ingredient or dish below. If you haven't already, we encourage
+                                you to create an account and log on, where you will be able to add to a custom collection of your favorite dishes!
                             </h4>
                         </div>
                     </div>
@@ -147,23 +147,24 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <h4> YASMAR NODROG </h4>
+                            <h6>For general</h6>
                         </div>
-                        <div class="col-lg-3 col-sm-2 col-xs-3">
-                            <h3> Contact </h3>
+                        <div class="col-lg-6 col-sm-4 col-xs-6">
+                            <h3> Sign up for our Email list!!!!</h3>
                             <ul>
-                                <li><a class="email"href="#"> insert email here </a></li>
-                                <br/>
-                                <li> <p> address line one </p> </li>
-                                <li> <p> address line two </p> </li>
+                                <form method = "POST" action = "/successSignUp" name = "user_email">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- <li><a class="email" type = "text" href="/successSignUp" method = "POST">Email</a></li> -->
                             </ul>
                         </div>
-                        <div class="col-lg-3 col-sm-2 col-xs-3">
-                            <ul>
-                                <li> <h5> <a href="#" style="margin-top: 5em"> ABOUT US</a> <h5></li>
-                                <li> <h5><a href="#"> CURRENT SERIES </a> <h5></li>
-                                <li> <h5><a href="#"> THE HOUSE </a> <h5></li>
-                                <li> <h5><a href="#"> LOOKING BACK </a> <h5></li>
-                            </ul>
+                        <!-- <div class="col-lg-3 col-sm-2 col-xs-3"> -->
+                            
                         </div>
                     
                     <!--/.row--> 
@@ -174,7 +175,7 @@
                                 
             <div class="footer-bottom">
                 <div class="container">
-                    <p class="pull-left copyright"> Copyright © Footer 2014. All right reserved. </p>
+                    <p class="pull-left copyright"> Copyright 2020. All right reserved. </p>
             
                 </div>
             </div>

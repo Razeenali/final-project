@@ -1,29 +1,36 @@
 # ---- YOUR APP STARTS HERE ----
 # -- Import section --
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_pymongo import PyMongo
 import model
 import bcrypt
+import os
 
 
 # -- Initialization section --
 app = Flask(__name__)
 
-app.secret_key = "eka23l2j1jkasd"
 
-# name of database
-# Stores user email signups (footer)
+# app secret key
+app.secret_key = 'eka23l2j1jkasd'
+# app.secret_key = os.environ['APP_SECRET_KEY']
+
+
+# Names of databases
+# Stores user email signups
 app.config['MONGO_DBNAME'] = 'user_information'
-# Stores user login information
+
+# Stores user login credentials (username, password) and their favorite foods
 app.config['MONGO_DBNAME'] = 'user_favorites'
 
 # database user: admin
 # password: B6ZboUGoYAC0RVeq
 
+# db_password = os.environ["database_password"]
+
 # URI of database
-# mongodb+srv://admin:<password>@cluster0.34ojx.mongodb.net/<dbname>?retryWrites=true&w=majority
-app.config['MONGO_URI'] = 'mongodb+srv://admin:B6ZboUGoYAC0RVeq@cluster0.34ojx.mongodb.net/user_information?retryWrites=true&w=majority'
-app.config['MONGO_URI'] = 'mongodb+srv://admin:B6ZboUGoYAC0RVeq@cluster0.34ojx.mongodb.net/user_favorites?retryWrites=true&w=majority'
+app.config['MONGO_URI'] = f'mongodb+srv://admin:B6ZboUGoYAC0RVeq@cluster0.34ojx.mongodb.net/user_information?retryWrites=true&w=majority'
+app.config['MONGO_URI'] = f'mongodb+srv://admin:B6ZboUGoYAC0RVeq@cluster0.34ojx.mongodb.net/user_favorites?retryWrites=true&w=majority'
 
 mongo = PyMongo(app)
 
@@ -33,8 +40,6 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    # collection = mongo.db.events
-    # events = collection.find({})
     if request.method == 'POST':
         session.clear()
         return render_template('index.html')
@@ -57,7 +62,6 @@ def user_favorites():
             return render_template('user_favorites.html', fav_foods=user_document[0]['favFood'])
         else:
             dishID = request.form['dishID']
-            # print('Type of DishID: ' + type(dishID))
             # list of dictionaries representing ingredients
             ingredients = model.getFavorite(dishID)['extendedIngredients']
             # obtain string description from each ingredient dictionary
@@ -66,20 +70,17 @@ def user_favorites():
                 user_fav_ingredients.append(ing['originalString'])
             # users collection
             collection = mongo.db.users
-            # specific session user document with given username
             # Add list of favorite dish information to session user document
             # if dish not yet marked favorite
-            # print("Type of: collection.find({'username':username}))" + type(collection.find({'username':username})))
             test = False
-            for dish_item in list(collection.find({'username':username}))[0]['favFood']:
+            for dish_item in list(collection.find({'username': username}))[0]['favFood']:
                 if dish_item['Dish ID'] == dishID:
                     test = True
             if not test:
-                collection.update_one({'username': username}, { '$push': {"favFood": {"Dish ID": dishID, "Dish title": model.getFavorite(dishID)['title'], "ingredients": user_fav_ingredients}}})
+                collection.update_one({'username': username}, {'$push': {"favFood": {"Dish ID": dishID, "Dish title": model.getFavorite(dishID)['title'], "ingredients": user_fav_ingredients}}})
                 user_document = list(collection.find({'username':username}))
-                print(user_document)
                 return render_template('user_favorites.html', fav_foods=user_document[0]['favFood'], username=username)
-            return 'Dish already exists'
+            return "Dish already exists Go to <a href='/index'>home</a>."
     else:
         return "You are not logged in! Go to <a href='/index'>home</a>."
 
@@ -108,15 +109,22 @@ def loginsignup():
         return "Sorry, username already exists. Please try again! <a href='/index'>home</a>"
 
 
+@app.route('/successSignUp', methods=['GET', 'POST'])
+def successSignUp():
+    if request.method == "POST":
+        return render_template('successSignUp.html')
+    return render_template('index.html')
+
+
 # User email signup, adds user email to database 'user_information' and 
 # redirects to successSignUp.html to show successful signup
-@app.route('/user_information', methods=['GET', 'POST'])
+@app.route('/successSignUp', methods=['GET', 'POST'])
 def user_information():
+    user_email = request.form['user_email']
     if request.method == 'GET':
         return render_template('index.html')
     else:
-        user_email = request.form['user_email']
-        collection = mongo.db.events
+        collection = mongo.db.emails
         collection.insert({"email": user_email})
         user_information = collection.find({})
         return render_template('successSignUp.html', user_information=user_information)
@@ -127,7 +135,6 @@ def user_information():
 def recipes():
     list_dishes = model.getListDishes(request.form['foodQ'])
     if 'username' in session:
-        print('hello')
         return render_template('loggedInRecipes.html', list_dishes=list_dishes)
     return render_template('recipes.html', list_dishes=list_dishes)
 

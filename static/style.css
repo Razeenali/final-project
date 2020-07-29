@@ -1,10 +1,20 @@
 body{
+    text-decoration: none;
     font-family: sans-serif;
+    text-align: center;
+}
+
+.container {
+    justify-content: center;
+}
+
+#login_result {
+    background: #ffedc9;
 }
 
 .navbar{   
     background-color: #ff8888;
-    background-image: linear-gradient(315deg, #ffdfdf 0%, #7e0505 74%);
+    /* background-image: linear-gradient(315deg, #ffdfdf 0%, #7e0505 74%); */
     padding:0 !important;
 }
 
@@ -24,7 +34,6 @@ body{
 }
 
 .navbar-nav li a{
-    color: #fff !important;
     font-weight: 600;
     float: right;
     text-align: left;
@@ -55,28 +64,12 @@ header{
    /*Sizing of the element*/
    height: 600px;
    width:100%;
-   /*Set and adjust background image*/
-   /* background-image: url("https://ak.picdn.net/shutterstock/videos/1040092985/thumb/1.jpg"); */
-   /* background-image: url('images/board.jpg') */
    background-size: cover;
    opacity: 0.9;
    /*Text properties for itself and all children elements*/
    color: white;
    text-align: center;
    font-family: 'Blinker', sans-serif;
-}
-header p {
-   /* Add the font-style property here*/
-    font-style: italic;
-}
-
-#login {
-    text-align: center;
-}
-
-#recipes_container {
-    padding: 10px;
-    border-radius: 10px;
 }
 
 
@@ -152,7 +145,7 @@ header p {
 
 /* Add a hover effect if you want */
 .fa:hover {
-  opacity: 0.7;
+  opacity: 0.9;
 }
 
 /**************************************** Footer ***************************************/

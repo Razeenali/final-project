@@ -5,24 +5,38 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
+    <link rel = "stylesheet" href = "../static/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel='stylesheet' type = 'text/css' href='../static/style.css'
+    
     <title>User Favorites Page</title>
   </head>
-  <body>
+  <body style="background: #e0ffcf; text-align:center;">
     
     <div class = 'container'>
         <div class = 'row'>
-            <h1>These are user {{username}}'s Favorites</h1>
+            <h1>These are your favorites!!</h1>
         </div>
         <div class="row">
-
-        {%for food in fav_foods%}
-            <div class = "col-md-3">
-                <p>{{food['Dish title']}}</p>
-                <!-- <h2>{{food['Dish title']}}</h2> -->
+            {%for food in fav_foods%}
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Dish Title </br> {{food['Dish title']}}</h5>
+                        <p class="card-text">Ingredients</p>
+                        {%for ingredient in food["ingredients"]%}
+                            <span>{{ingredient}} AND </span>
+                        {%endfor%}
+                    </div>
+                </div>
+            {%endfor%}
+        <!-- {%for food in fav_foods%}
+            <div class = "col-12 col-sm-6">
+                <span>Dish Title: {{food['Dish title']}}</span>
+                <p>Ingredients</p>
+                {%for ingredient in food["ingredients"]%}
+                    <span>{{ingredient}}, </span>
+                {%endfor%}
             </div>
-        {%endfor%}
+        {%endfor%} -->
         </div>
     </div>
 

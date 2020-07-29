@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel = "stylesheet" href = "../static/style.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -12,13 +12,13 @@
   </head>
   <body>
       {% if session %} <!-- if user is either new or existing -->
-      <!-- welcome -->
-        <div>
-            <h1>Welcome to ...</h1>
+      <!-- welcome message -->
+        <div class = "container" id = "login_result">
+            <h1>You are signed in! Go to <a href='/index'>HOME</a></h1>
         </div>
       {%else%}
-      <!-- error message wrong pw -->
-        <h1>You ENter the wrong pw</h1>
+      <!-- error message wrong password -->
+        <h1>You entered the wrong password, please try again! Go to <a href='/index'>home</a></h1>
       {%endif%}
 
 
